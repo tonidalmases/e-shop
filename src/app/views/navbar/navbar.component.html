@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <a class="navbar-brand" (click)="navigateTo('/')" role="button">E-shop</a>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="isMenuCollapsed = !isMenuCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul ngbNav class="navbar-nav mr-auto">
+      <li ngbNavItem class="d-flex align-items-center">
+        <a ngbNavLink (click)="navigateTo('/shopping-cart')">Shopping cart</a>
+        <span class="badge badge-pill badge-primary">{{
+          cartQuantity$ | async
+        }}</span>
+      </li>
+      <li
+        *ngIf="user$ | async as user; else anonymousUser"
+        ngbNavItem
+        ngbDropdown
+      >
+        <button class="btn" id="userDropdown" ngbDropdownToggle>
+          {{ user.name }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="userDropdown">
+          <button ngbDropdownItem (click)="navigateTo('/my-orders')">
+            My orders
+          </button>
+          <ng-container *ngIf="user.isAdmin">
+            <button ngbDropdownItem (click)="navigateTo('/admin/orders')">
+              Manage orders
+            </button>
+            <button ngbDropdownItem (click)="navigateTo('/admin/products')">
+              Manage products
+            </button>
+          </ng-container>
+          <button ngbDropdownItem (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </li>
+      <ng-template #anonymousUser>
+        <li ngbNavItem>
+          <a ngbNavLink (click)="navigateTo('/login')">Login</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

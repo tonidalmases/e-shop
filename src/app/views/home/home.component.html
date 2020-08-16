@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-2 col-md-2 col-sm-4">
+    <ul
+      ngbNav
+      [(activeId)]="activeCategory"
+      class="nav-pills"
+      orientation="vertical"
+    >
+      <li [ngbNavItem]="categoryAll.key">
+        <a ngbNavLink [routerLink]="['/']">{{ categoryAll.name }}</a>
+      </li>
+      <li
+        *ngFor="let category of categories$ | async"
+        [ngbNavItem]="category.key"
+      >
+        <a
+          ngbNavLink
+          [routerLink]="['/']"
+          [queryParams]="{ category: category.name }"
+          >{{ category.name }}</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-10 col-md-10 col-sm-8">
+    <div class="card-columns">
+      <div *ngFor="let product of products$ | async" class="card">
+        <app-product-card
+          [product]="product"
+          [cartProductQuantity]="getCartProductQuantity(product)"
+        ></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

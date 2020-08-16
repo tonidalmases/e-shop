@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between">
+  <a
+    class="btn btn-secondary btn-add-to-cart"
+    (click)="addProduct()"
+    *ngIf="quantity === 0; else addRemoveButtons"
+  >
+    Add to cart
+  </a>
+  <ng-template #addRemoveButtons>
+    <a class="btn btn-secondary btn-add-remove" (click)="removeProduct()">-</a>
+    <span class="align-self-center">{{ quantity }}</span>
+    <a class="btn btn-secondary btn-add-remove" (click)="addProduct()">+</a>
+  </ng-template>
+</div>

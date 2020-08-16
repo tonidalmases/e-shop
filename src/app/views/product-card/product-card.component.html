@@ -1,0 +1,15 @@
+<div class="card-header">
+  <img [src]="product.pictureUrl" class="card-img-top" />
+</div>
+
+<div class="card-body">
+  <h5 class="card-title">{{ product.name }}</h5>
+  <p class="card-text">{{ product.price | currency: "EUR" }}</p>
+</div>
+
+<div class="card-footer">
+  <app-product-quantity
+    [product]="product"
+    [quantity]="cartProductQuantity"
+  ></app-product-quantity>
+</div>
