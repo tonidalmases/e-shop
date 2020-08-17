@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CartHelper } from 'src/app/helpers/cart.helper';
 import { ICartProduct } from 'src/app/models/cart-product';
-import { Order } from 'src/app/models/order';
+import { IOrder } from 'src/app/models/order';
 import { IShipping } from 'src/app/models/shipping';
 import { IUser } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -80,11 +80,12 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   placeOrder(): void {
     if (this.formShipping.valid) {
-      const order = new Order(
-        this.user.key,
-        this.formShipping.value as IShipping,
-        this.cartProducts
-      );
+      const order: IOrder = {
+        userKey: this.user.key,
+        shipping: this.formShipping.value as IShipping,
+        cartProducts: this.cartProducts,
+        dateOrder: new Date().getTime(),
+      };
       this.orderService.placeOrder(order).then((key) => {
         this.router.navigate(['/order-success', key]);
       });

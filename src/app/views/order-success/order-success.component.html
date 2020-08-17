@@ -1,1 +1,109 @@
-<p>order-success works!</p>
+<div *ngIf="order$ | async as order">
+  <h3>Order information</h3>
+  <p>
+    The order <strong>{{ order.key }}</strong> was successfuly registered on:
+    <strong>{{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}</strong>
+  </p>
+
+  <div class="row">
+    <div class="col-md mb-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              [value]="order.shipping.name"
+              disabled
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="line1">Address (line 1)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="line1"
+                [value]="order.shipping.address.line1"
+                disabled
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="line2">Address (line 2)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="line2"
+                [value]="order.shipping.address.line2"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                [value]="order.shipping.country"
+                disabled
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="city">City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                [value]="order.shipping.city"
+                disabled
+              />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="zipCode">Zip</label>
+              <input
+                type="text"
+                class="form-control"
+                id="zipCode"
+                [value]="order.shipping.zipCode"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md mb-3">
+      <div class="card">
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let cartProduct of order.cartProducts">
+                <td>
+                  {{ cartProduct.quantity }} x {{ cartProduct.product.name }}
+                </td>
+                <td>
+                  <span class="float-right">{{
+                    getTotalProductPrice(cartProduct) | currency: "EUR"
+                  }}</span>
+                </td>
+              </tr>
+              <tr class="font-weight-bold">
+                <td>Total</td>
+                <td>
+                  <span class="float-right">{{
+                    getTotalProductsPrice(order.cartProducts) | currency: "EUR"
+                  }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -31,11 +31,10 @@ export class AdminProductComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.categoryService.getCategories();
 
-    const paramKey = this.route.snapshot.paramMap.get('key');
+    this.productKey = this.route.snapshot.paramMap.get('key');
 
-    if (paramKey !== 'new') {
-      this.productService.getProduct(paramKey).subscribe((p) => {
-        this.productKey = p.key;
+    if (this.productKey) {
+      this.productService.getProduct(this.productKey).subscribe((p) => {
         this.initForm(p.name, p.price, p.category, p.pictureUrl);
       });
     } else {

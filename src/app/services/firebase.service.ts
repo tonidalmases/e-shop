@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import {
+  AngularFireDatabase,
+  AngularFireObject,
+  QueryFn,
+} from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,9 +13,9 @@ import { map } from 'rxjs/operators';
 export class FirebaseService {
   constructor(private db: AngularFireDatabase) {}
 
-  public list<T>(path: string): Observable<T[]> {
+  public list<T>(path: string, queryFn?: QueryFn): Observable<T[]> {
     return this.db
-      .list<T>(path)
+      .list<T>(path, queryFn)
       .snapshotChanges()
       .pipe(
         map((actions) =>

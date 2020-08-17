@@ -1,1 +1,48 @@
-<p>admin-orders works!</p>
+<div *ngIf="orders$">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">User</th>
+        <th scope="col">Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let order of orders$
+            | async
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize;
+          index as i
+        "
+      >
+        <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+        <td>{{ order.userKey }}</td>
+        <td>{{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}</td>
+        <td>
+          <a [routerLink]="['/order-success/', order.key]">View</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="(orders$ | async)?.length"
+    ></ngb-pagination>
+
+    <select
+      class="custom-select"
+      style="width: auto;"
+      name="pageSize"
+      [(ngModel)]="pageSize"
+    >
+      <option *ngFor="let items of itemsPerPage" [value]="items"
+        >{{ items }} items per page</option
+      >
+    </select>
+  </div>
+</div>
