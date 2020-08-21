@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminOrdersComponent } from './views/admin-orders/admin-orders.component';
-import { AdminProductsComponent } from './views/admin-products/admin-products.component';
-import { CheckOutComponent } from './views/check-out/check-out.component';
-import { HomeComponent } from './views/home/home.component';
-import { LoginComponent } from './views/login/login.component';
-import { OrderSuccessComponent } from './views/order-success/order-success.component';
-import { ProductsComponent } from './views/products/products.component';
-import { ShoppingCartComponent } from './views/shopping-cart/shopping-cart.component';
-import { MyOrdersComponent } from './views/my-orders/my-orders.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductComponent } from './components/admin-product/admin-product.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
-import { AdminProductComponent } from './views/admin-product/admin-product.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
