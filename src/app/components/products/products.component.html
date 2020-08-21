@@ -1,1 +1,8 @@
-<p>products works!</p>
+<div class="card-columns">
+  <div *ngFor="let product of products$ | async" class="card">
+    <app-product-card
+      [product]="product"
+      [cartProductQuantity]="getCartProductQuantity(product)"
+    ></app-product-card>
+  </div>
+</div>

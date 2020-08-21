@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductComponent } from './components/admin-product/admin-product.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,8 +19,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ProductsComponent } from './components/products/products.component';
     ProductCardComponent,
     ProductQuantityComponent,
     ProductsComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+<ul
+  ngbNav
+  [(activeId)]="activeCategory"
+  class="nav-pills"
+  orientation="vertical"
+>
+  <li [ngbNavItem]="categoryAll.key">
+    <a ngbNavLink [routerLink]="['/']">{{ categoryAll.name }}</a>
+  </li>
+  <li *ngFor="let category of categories$ | async" [ngbNavItem]="category.key">
+    <a
+      ngbNavLink
+      [routerLink]="['/']"
+      [queryParams]="{ category: category.name }"
+      >{{ category.name }}</a
+    >
+  </li>
+</ul>
