@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
-import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { map } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { CartHelper } from '../../helpers/cart.helper';
 
 @Component({
@@ -14,7 +14,7 @@ import { CartHelper } from '../../helpers/cart.helper';
 })
 export class NavbarComponent implements OnInit {
   isMenuCollapsed = true;
-  user$: Observable<IUser>;
+  user$: Observable<User>;
 
   cartQuantity$: Observable<number>;
 
@@ -23,15 +23,13 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService
   ) {
-    this.user$ = this.authService.appUser$;
+    this.user$ = this.authService.user$;
   }
 
-  ngOnInit(): void {
-    this.shoppingCartService.getShoppingCart().then((cart$) => {
-      this.cartQuantity$ = cart$.pipe(
-        map((cart) => CartHelper.getTotalProductsQuantity(cart.products))
-      );
-    });
+  async ngOnInit(): Promise<void> {
+    this.cartQuantity$ = (
+      await this.shoppingCartService.getShoppingCart()
+    ).pipe(map((cart) => CartHelper.getTotalProductsQuantity(cart.products)));
   }
 
   navigateTo(path: string): void {

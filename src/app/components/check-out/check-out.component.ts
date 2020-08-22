@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartHelper } from 'src/app/helpers/cart.helper';
-import { ICartProduct } from 'src/app/models/cart-product';
-import { IOrder } from 'src/app/models/order';
-import { IShipping } from 'src/app/models/shipping';
-import { IUser } from 'src/app/models/user';
+import { CartProduct } from 'src/app/models/cart-product';
+import { Order } from 'src/app/models/order';
+import { Shipping } from 'src/app/models/shipping';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -19,10 +19,10 @@ import { Router } from '@angular/router';
 export class CheckOutComponent implements OnInit, OnDestroy {
   formShipping: FormGroup;
 
-  cartProducts: ICartProduct[];
+  cartProducts: CartProduct[];
   cartSubscription: Subscription;
 
-  user: IUser;
+  user: User;
   userSubscription: Subscription;
 
   constructor(
@@ -35,10 +35,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formShipping = new FormGroup({
       name: new FormControl('', Validators.required),
-      address: new FormGroup({
-        line1: new FormControl('', Validators.required),
-        line2: new FormControl(''),
-      }),
+      address: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       zipCode: new FormControl('', [
         Validators.required,
@@ -56,7 +53,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
           ))
       );
 
-    this.userSubscription = this.authService.appUser$.subscribe(
+    this.userSubscription = this.authService.user$.subscribe(
       (user) => (this.user = user)
     );
   }
@@ -64,10 +61,6 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.cartSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
-  }
-
-  getTotalProductPrice(cartProduct: ICartProduct): number {
-    return CartHelper.getTotalProductPrice(cartProduct);
   }
 
   get cartQuantity(): number {
@@ -78,16 +71,20 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     return CartHelper.getTotalProductsPrice(this.cartProducts);
   }
 
+  getTotalProductPrice(cartProduct: CartProduct): number {
+    return CartHelper.getTotalProductPrice(cartProduct);
+  }
+
   placeOrder(): void {
     if (this.formShipping.valid) {
-      const order: IOrder = {
-        userKey: this.user.key,
-        shipping: this.formShipping.value as IShipping,
+      const order: Order = {
+        user: this.user,
+        shipping: this.formShipping.value as Shipping,
         cartProducts: this.cartProducts,
         dateOrder: new Date().getTime(),
       };
-      this.orderService.placeOrder(order).then((key) => {
-        this.router.navigate(['/order-success', key]);
+      this.orderService.placeOrder(order).then((dr) => {
+        this.router.navigate(['/order-success', dr.id]);
       });
     }
   }

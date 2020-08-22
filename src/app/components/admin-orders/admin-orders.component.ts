@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IOrder } from 'src/app/models/order';
+import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./admin-orders.component.scss'],
 })
 export class AdminOrdersComponent implements OnInit {
-  orders$: Observable<IOrder[]>;
+  orders$: Observable<Order[]>;
 
   page = 1;
   pageSize = 5;

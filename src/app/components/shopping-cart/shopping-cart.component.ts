@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ICartProduct } from 'src/app/models/cart-product';
+import { CartProduct } from 'src/app/models/cart-product';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { CartHelper } from '../../helpers/cart.helper';
-import { IProduct } from 'src/app/models/product';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,7 +10,7 @@ import { IProduct } from 'src/app/models/product';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-  cartProducts: ICartProduct[];
+  cartProducts: CartProduct[];
   cartSubscription: Subscription;
 
   constructor(private shoppingCartService: ShoppingCartService) {}
@@ -35,12 +34,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     return CartHelper.getTotalProductsQuantity(this.cartProducts);
   }
 
-  getTotalProductPrice(cartProduct: ICartProduct): number {
-    return CartHelper.getTotalProductPrice(cartProduct);
-  }
-
   get totalProductsPrice(): number {
     return CartHelper.getTotalProductsPrice(this.cartProducts);
+  }
+
+  getTotalProductPrice(cartProduct: CartProduct): number {
+    return CartHelper.getTotalProductPrice(cartProduct);
   }
 
   clearShoppingCart(): void {

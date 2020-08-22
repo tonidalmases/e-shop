@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { IProduct } from 'src/app/models/product';
+import { Product } from 'src/app/models/product';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent implements OnInit {
-  products$: Observable<any[]>;
+  products$: Observable<Product[]>;
   filter = new FormControl('');
 
   page = 1;
@@ -33,7 +33,7 @@ export class AdminProductsComponent implements OnInit {
     );
   }
 
-  private filterProducts(allProducts: IProduct[], value: string): IProduct[] {
+  private filterProducts(allProducts: Product[], value: string): Product[] {
     return allProducts.filter((p) => p.name.toLowerCase().includes(value));
   }
 }

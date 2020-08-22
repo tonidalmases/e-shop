@@ -1,67 +1,81 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFireDatabase,
-  AngularFireObject,
+  AngularFirestore,
+  DocumentReference,
+  DocumentSnapshot,
+  QueryDocumentSnapshot,
   QueryFn,
-} from '@angular/fire/database';
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  public list<T>(path: string, queryFn?: QueryFn): Observable<T[]> {
-    return this.db
-      .list<T>(path, queryFn)
+  public list<T>(
+    path: string,
+    queryFn?: QueryFn
+  ): Observable<QueryDocumentSnapshot<T>[]> {
+    return this.firestore
+      .collection<T>(path, queryFn)
       .snapshotChanges()
       .pipe(
         map((actions) =>
-          actions.map((a) => ({ key: a.payload.key, ...a.payload.val() } as T))
+          actions.filter((a) => a.payload.doc.exists).map((a) => a.payload.doc)
         )
       );
   }
 
-  public add<T>(path: string, data: T): firebase.database.ThenableReference {
-    return this.db.list<T>(path).push(data);
+  public add<T>(path: string, data: T): Promise<DocumentReference> {
+    return this.firestore.collection(path).add(data);
   }
 
-  public update<T>(path: string, data: T): void {
-    if (data.hasOwnProperty('key')) {
-      // tslint:disable-next-line: no-string-literal
-      const key = data['key'];
-      // tslint:disable-next-line: no-string-literal
-      delete data['key'];
-
-      this.db.object(path + key).update(data);
-    }
+  public update<T>(path: string, id: string, data: T): Promise<void> {
+    return this.firestore.collection(path).doc<T>(id).set(data);
   }
 
-  public updateWithKey<T>(path: string, key: string, data: T): void {
-    this.db.object(path + key).update(data);
+  public delete<T>(path: string, id: string): Promise<void> {
+    return this.firestore.collection(path).doc<T>(id).delete();
   }
 
-  public delete<T>(path: string, key: string): void {
-    this.db.object<T>(path + key).remove();
-  }
-
-  public get<T>(path: string, key: string): Observable<T> {
-    return this.db
-      .object<T>(path + key)
+  public get<T>(path: string, id: string): Observable<DocumentSnapshot<T>> {
+    return this.firestore
+      .collection<T>(path)
+      .doc<T>(id)
       .snapshotChanges()
-      .pipe(map((a) => ({ key: a.payload.key, ...a.payload.val() } as T)));
+      .pipe(
+        filter((a) => a.payload.exists),
+        map((a) => a.payload)
+      );
   }
 
-  public getObject<T>(path: string, key: string): AngularFireObject<T> {
-    return this.db.object<T>(path + key);
-  }
-
-  public transaction<T>(
+  public getDocumentReference(
     path: string,
-    transactionUpdate: (data: T) => any
-  ): void {
-    this.db.database.ref(path).transaction(transactionUpdate);
+    id: string
+  ): firebase.firestore.DocumentReference<firebase.firestore.DocumentData> {
+    return this.firestore.firestore.collection(path).doc(id);
+  }
+
+  public runTransaction(
+    updateTransaction: (
+      transaction: firebase.firestore.Transaction
+    ) => Promise<unknown>
+  ): Promise<unknown> {
+    return this.firestore.firestore.runTransaction(updateTransaction);
+  }
+
+  public async emptyCollection(path: string): Promise<unknown> {
+    const collection = await this.firestore.firestore.collection(path).get();
+
+    const updateTransaction = async (
+      transaction: firebase.firestore.Transaction
+    ) => {
+      collection.forEach((document) => transaction.delete(document.ref));
+    };
+
+    return this.runTransaction(updateTransaction);
   }
 }

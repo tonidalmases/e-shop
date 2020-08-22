@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IOrder } from '../models/order';
+import { DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { IOrderData, Order } from '../models/order';
+import { AuthService } from './auth.service';
 import { FirebaseService } from './firebase.service';
 import { ShoppingCartService } from './shopping-cart.service';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,26 +19,40 @@ export class OrderService {
     private authService: AuthService
   ) {}
 
-  async placeOrder(order: IOrder): Promise<string> {
-    const result = await this.firebaseService.add(this.ordersPath, order);
+  placeOrder(order: Order): Promise<DocumentReference> {
+    const orderData = Order.getOrderData(order);
+    const orderReference = this.firebaseService.add(this.ordersPath, orderData);
+
     this.shoppingCartService.clearShoppingCart();
-    return result.key;
+
+    return orderReference;
   }
 
-  getOrder(key: string): Observable<IOrder> {
-    return this.firebaseService.get<IOrder>(this.ordersPath, key);
+  getOrder(id: string): Observable<Order> {
+    return this.firebaseService
+      .get<IOrderData>(this.ordersPath, id)
+      .pipe(map((snapshot) => Order.getOrderFromSnapshot(snapshot)));
   }
 
-  getOrders(): Observable<IOrder[]> {
-    return this.firebaseService.list<IOrder>(this.ordersPath);
-  }
-
-  getOrdersByUser(): Observable<IOrder[]> {
-    return this.authService.appUser$.pipe(
-      switchMap((user) =>
-        this.firebaseService.list<IOrder>(this.ordersPath, (ref) =>
-          ref.orderByChild('userKey').equalTo(user.key)
+  getOrders(): Observable<Order[]> {
+    return this.firebaseService
+      .list<IOrderData>(this.ordersPath)
+      .pipe(
+        map((snapshots) =>
+          snapshots.map((snapshot) => Order.getOrderFromSnapshot(snapshot))
         )
+      );
+  }
+
+  getOrdersByUser(): Observable<Order[]> {
+    return this.authService.user$.pipe(
+      switchMap((user) =>
+        this.firebaseService.list<IOrderData>(this.ordersPath, (ref) => {
+          return ref.where('user.id', '==', user.id);
+        })
+      ),
+      map((snapshots) =>
+        snapshots.map((snapshot) => Order.getOrderFromSnapshot(snapshot))
       )
     );
   }

@@ -16,26 +16,17 @@
         />
       </div>
 
-      <div class="form-group" formGroupName="address">
-        <label for="line1">Address</label>
+      <div class="form-group">
+        <label for="address">Address</label>
         <input
-          id="line1"
+          id="address"
           class="form-control"
           type="text"
-          formControlName="line1"
-          placeholder="Line 1"
+          formControlName="address"
           [class.is-invalid]="
-            formShipping.get('address').get('line1').touched &&
-            formShipping.get('address').get('line1').invalid
+            formShipping.get('address').touched &&
+            formShipping.get('address').invalid
           "
-        />
-
-        <input
-          id="line2"
-          class="form-control mt-2"
-          type="text"
-          formControlName="line2"
-          placeholder="Line 2 (optional)"
         />
       </div>
 

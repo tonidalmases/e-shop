@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { IProduct } from 'src/app/models/product';
+import { Product } from 'src/app/models/product';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
-import { ICategory } from '../../models/category';
+import { Category } from '../../models/category';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -16,9 +16,9 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class AdminProductComponent implements OnInit {
   formProduct: FormGroup;
-  categories$: Observable<ICategory[]>;
+  categories$: Observable<Category[]>;
 
-  private productKey: string;
+  productId: string;
 
   constructor(
     private productService: ProductService,
@@ -31,10 +31,10 @@ export class AdminProductComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.categoryService.getCategories();
 
-    this.productKey = this.route.snapshot.paramMap.get('key');
+    this.productId = this.route.snapshot.paramMap.get('id');
 
-    if (this.productKey) {
-      this.productService.getProduct(this.productKey).subscribe((p) => {
+    if (this.productId) {
+      this.productService.getProduct(this.productId).subscribe((p) => {
         this.initForm(p.name, p.price, p.category, p.pictureUrl);
       });
     } else {
@@ -45,7 +45,7 @@ export class AdminProductComponent implements OnInit {
   private initForm(
     name: string,
     price: number | null,
-    category: ICategory,
+    category: Category,
     pictureUrl: string
   ): void {
     this.formProduct = new FormGroup({
@@ -61,16 +61,16 @@ export class AdminProductComponent implements OnInit {
     });
   }
 
-  compareByKey(item1: ICategory, item2: ICategory): boolean {
-    return item1?.key === item2?.key;
+  compareById(item1: Category, item2: Category): boolean {
+    return item1?.id === item2?.id;
   }
 
   save(): void {
     if (this.formProduct.valid) {
-      const product: IProduct = this.formProduct.value;
+      const product: Product = this.formProduct.value;
 
-      if (this.productKey) {
-        product.key = this.productKey;
+      if (this.productId) {
+        product.id = this.productId;
         this.productService.updateProduct(product);
       } else {
         this.productService.addProduct(product);
@@ -81,7 +81,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   delete(): void {
-    if (this.productKey) {
+    if (this.productId) {
       const modalRef = this.modalService.open(ConfirmationDialogComponent);
       modalRef.componentInstance.title = 'Delete product';
       modalRef.componentInstance.content = [
@@ -90,7 +90,7 @@ export class AdminProductComponent implements OnInit {
 
       modalRef.result.then((res: boolean) => {
         if (res) {
-          this.productService.deleteProduct(this.productKey);
+          this.productService.deleteProduct(this.productId);
           this.router.navigate(['/admin/products']);
         }
       });

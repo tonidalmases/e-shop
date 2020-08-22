@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ICart, ICartFirebase } from '../models/cart';
-import { IProduct } from '../models/product';
-import { FirebaseService } from './firebase.service';
 import { Observable } from 'rxjs';
-import { ICartProduct } from '../models/cart-product';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { Cart, ICartData } from '../models/cart';
+import { CartProduct, ICartProductData } from '../models/cart-product';
+import { Product } from '../models/product';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,80 +16,108 @@ export class ShoppingCartService {
 
   constructor(private firebaseService: FirebaseService) {}
 
-  public async addToCart(product: IProduct): Promise<void> {
-    this.cartTransaction(product, (data) => ({
-      product,
-      quantity: (data?.quantity || 0) + 1,
-    }));
-  }
+  public async addToCart(product: Product): Promise<void> {
+    const cartId = await this.getOrCreateCartId();
 
-  public async removeFromCart(product: IProduct): Promise<void> {
-    this.cartTransaction(product, (data) =>
-      data && data.quantity > 1
-        ? { product, quantity: data.quantity - 1 }
-        : null
+    const docRef = this.firebaseService.getDocumentReference(
+      this.shoppingCartsPath + cartId + this.shoppingCartProductsPath,
+      product.id
     );
+
+    const updateTransaction = async (
+      transaction: firebase.firestore.Transaction
+    ) => {
+      const doc = await transaction.get(docRef);
+      if (!doc.exists) {
+        transaction.set(docRef, {
+          product: Product.getProductData(product),
+          quantity: 1,
+        });
+      } else {
+        transaction.update(docRef, { quantity: doc.data().quantity + 1 });
+      }
+    };
+
+    this.firebaseService.runTransaction(updateTransaction);
   }
 
-  public async getShoppingCart(): Promise<Observable<ICart>> {
-    const cartKey = await this.getOrCreateCartKey();
+  public async removeFromCart(product: Product): Promise<void> {
+    const cartId = await this.getOrCreateCartId();
+
+    const docRef = this.firebaseService.getDocumentReference(
+      this.shoppingCartsPath + cartId + this.shoppingCartProductsPath,
+      product.id
+    );
+
+    const updateTransaction = async (
+      transaction: firebase.firestore.Transaction
+    ) => {
+      const doc = await transaction.get(docRef);
+      if (doc.exists) {
+        if (doc.data().quantity > 1) {
+          transaction.set(docRef, {
+            product: Product.getProductData(product),
+            quantity: doc.data().quantity - 1,
+          });
+        } else {
+          transaction.delete(docRef);
+        }
+      }
+    };
+
+    this.firebaseService.runTransaction(updateTransaction);
+  }
+
+  public async getShoppingCart(): Promise<Observable<Cart>> {
+    const cartId = await this.getOrCreateCartId();
 
     return this.firebaseService
-      .get<ICartFirebase>(this.shoppingCartsPath, cartKey)
+      .get<ICartData>(this.shoppingCartsPath, cartId)
       .pipe(
-        map((cartFirebase) => {
-          const cart: ICart = {
-            key: cartFirebase.key,
-            dateCreated: cartFirebase.dateCreated,
-            products: [],
-          };
-          for (const productId in cartFirebase.products) {
-            if (productId) {
-              cart.products.push({
-                key: productId,
-                ...cartFirebase.products[productId],
-              });
-            }
-          }
-          return cart;
+        switchMap((snapshotCart) => {
+          const cart = Cart.getCartFromSnapshot(snapshotCart);
+          return this.firebaseService
+            .list<ICartProductData>(
+              this.shoppingCartsPath + cartId + this.shoppingCartProductsPath
+            )
+            .pipe(
+              map((snapshotCartProducts) => {
+                return {
+                  ...cart,
+                  products: snapshotCartProducts.map((scp) =>
+                    CartProduct.getCartProductFromSnapshot(scp)
+                  ),
+                } as Cart;
+              })
+            );
         })
       );
   }
 
   public async clearShoppingCart(): Promise<void> {
-    const cartKey = await this.getOrCreateCartKey();
-    this.firebaseService.delete(this.shoppingCartsPath + cartKey, '/products/');
-  }
-
-  private async cartTransaction(
-    product: IProduct,
-    transactionUpdate: (data: ICartProduct) => any
-  ): Promise<void> {
-    const cartKey = await this.getOrCreateCartKey();
-
-    this.firebaseService.transaction<ICartProduct>(
-      this.shoppingCartsPath +
-        cartKey +
-        this.shoppingCartProductsPath +
-        product.key,
-      transactionUpdate
+    const cartId = await this.getOrCreateCartId();
+    this.firebaseService.emptyCollection(
+      this.shoppingCartsPath + cartId + this.shoppingCartProductsPath
     );
   }
 
-  private async getOrCreateCartKey(): Promise<string> {
-    const cartId = localStorage.getItem(this.localStorageCartId);
+  private async getOrCreateCartId(): Promise<string> {
+    let cartId = localStorage.getItem(this.localStorageCartId);
     if (!cartId) {
-      const result = await this.createCart();
-      localStorage.setItem(this.localStorageCartId, result.key);
-      return result.key;
+      cartId = await this.createCart();
+      localStorage.setItem(this.localStorageCartId, cartId);
     }
     return cartId;
   }
 
-  private createCart(): firebase.database.ThenableReference {
-    const cart: ICart = {
+  private async createCart(): Promise<string> {
+    const cartData: ICartData = {
       dateCreated: new Date().getTime(),
     };
-    return this.firebaseService.add<ICart>(this.shoppingCartsPath, cart);
+    const result = await this.firebaseService.add<ICartData>(
+      this.shoppingCartsPath,
+      cartData
+    );
+    return result.id;
   }
 }

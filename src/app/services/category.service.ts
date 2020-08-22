@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { ICategory } from '../models/category';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Category, ICategoryData } from '../models/category';
 import { FirebaseService } from './firebase.service';
 
 @Injectable({
@@ -13,13 +12,21 @@ export class CategoryService {
 
   constructor(private firebaseService: FirebaseService) {}
 
-  public getCategories(): Observable<ICategory[]> {
-    return this.firebaseService.list<ICategory>(this.categoriesPath);
+  public getCategories(): Observable<Category[]> {
+    return this.firebaseService
+      .list<ICategoryData>(this.categoriesPath)
+      .pipe(
+        map((snapshots) =>
+          snapshots.map((snapshot) =>
+            Category.getCategoryFromSnapshot(snapshot)
+          )
+        )
+      );
   }
 
-  public getCategoryAll(): ICategory {
+  public getCategoryAll(): Category {
     return {
-      key: 'all',
+      id: 'all',
       name: 'All categories',
     };
   }

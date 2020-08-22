@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IProduct } from 'src/app/models/product';
+import { Component, Input } from '@angular/core';
+import { Product } from 'src/app/models/product';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { ICartProduct } from 'src/app/models/cart-product';
 
 @Component({
   selector: 'app-product-quantity',
@@ -10,7 +9,7 @@ import { ICartProduct } from 'src/app/models/cart-product';
 })
 export class ProductQuantityComponent {
   @Input()
-  product: IProduct;
+  product: Product;
 
   @Input()
   quantity: number;

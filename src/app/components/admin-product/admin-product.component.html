@@ -41,7 +41,7 @@
             id="category"
             class="custom-select"
             formControlName="category"
-            [compareWith]="compareByKey"
+            [compareWith]="compareById"
             [class.is-invalid]="
               formProduct.get('category').touched &&
               formProduct.get('category').invalid
@@ -83,7 +83,7 @@
         >
           Cancel
         </button>
-        <button class="btn btn-danger" (click)="delete()" *ngIf="productKey">
+        <button class="btn btn-danger" (click)="delete()" *ngIf="productId">
           Delete
         </button>
       </div>

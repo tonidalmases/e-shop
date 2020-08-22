@@ -18,10 +18,10 @@
         "
       >
         <td>{{ (page - 1) * pageSize + i + 1 }}</td>
-        <td>{{ order.userKey }}</td>
+        <td>{{ order.user.name }}</td>
         <td>{{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}</td>
         <td>
-          <a [routerLink]="['/order-success/', order.key]">View</a>
+          <a [routerLink]="['/order-success/', order.id]">View</a>
         </td>
       </tr>
     </tbody>

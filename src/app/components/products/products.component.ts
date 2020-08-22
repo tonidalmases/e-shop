@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ICartProduct } from 'src/app/models/cart-product';
-import { IProduct } from 'src/app/models/product';
+import { CartProduct } from 'src/app/models/cart-product';
+import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
@@ -13,10 +13,10 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  products$: Observable<IProduct[]>;
+  products$: Observable<Product[]>;
 
   cartSubscription: Subscription;
-  cartProducts: ICartProduct[];
+  cartProducts: CartProduct[];
 
   constructor(
     private route: ActivatedRoute,
@@ -49,9 +49,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private filterProductsByCategory(
-    allProducts: IProduct[],
+    allProducts: Product[],
     categoryName: string
-  ): IProduct[] {
+  ): Product[] {
     return allProducts.filter((p) => p.category.name === categoryName);
   }
 
@@ -63,12 +63,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getCartProductQuantity(product: IProduct): number {
+  getCartProductQuantity(product: CartProduct): number {
     if (!this.cartProducts) {
       return 0;
     }
 
-    const cartProduct = this.cartProducts.find((p) => p.key === product.key);
+    const cartProduct = this.cartProducts.find((p) => p.id === product.id);
     return cartProduct ? cartProduct.quantity : 0;
   }
 }

@@ -1,7 +1,7 @@
-import { ICartProduct } from '../models/cart-product';
+import { CartProduct } from '../models/cart-product';
 
 export class CartHelper {
-  static getTotalProductsQuantity(cartProducts: ICartProduct[]): number {
+  static getTotalProductsQuantity(cartProducts: CartProduct[]): number {
     return cartProducts
       ? cartProducts.reduce(
           (acc, cartProduct) => acc + (cartProduct.quantity || 0),
@@ -10,11 +10,11 @@ export class CartHelper {
       : 0;
   }
 
-  static getTotalProductPrice(cartProduct: ICartProduct): number {
+  static getTotalProductPrice(cartProduct: CartProduct): number {
     return cartProduct ? cartProduct.quantity * cartProduct.product.price : 0;
   }
 
-  static getTotalProductsPrice(cartProducts: ICartProduct[]): number {
+  static getTotalProductsPrice(cartProducts: CartProduct[]): number {
     return cartProducts
       ? cartProducts.reduce(
           (acc, cartProduct) =>

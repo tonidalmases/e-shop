@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICategory } from 'src/app/models/category';
+import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  categories$: Observable<ICategory[]>;
-  categoryAll: ICategory;
+  categories$: Observable<Category[]>;
+  categoryAll: Category;
   activeCategory: string;
 
   constructor(private categoryService: CategoryService) {}
@@ -18,6 +18,6 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.categoryService.getCategories();
     this.categoryAll = this.categoryService.getCategoryAll();
-    this.activeCategory = this.categoryAll.key;
+    this.activeCategory = this.categoryAll.id;
   }
 }

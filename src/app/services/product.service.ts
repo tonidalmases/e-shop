@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { IProduct } from '../models/product';
+import { map } from 'rxjs/operators';
+import { IProductData, Product } from '../models/product';
 import { FirebaseService } from './firebase.service';
 
 @Injectable({
@@ -11,23 +13,40 @@ export class ProductService {
 
   constructor(private firebaseService: FirebaseService) {}
 
-  public getProducts(): Observable<IProduct[]> {
-    return this.firebaseService.list<IProduct>(this.productsPath);
+  public getProducts(): Observable<Product[]> {
+    return this.firebaseService.list<IProductData>(this.productsPath).pipe(
+      map((snapshots) =>
+        snapshots.map((snapshot) => {
+          return Product.getProductFromSnapshot(snapshot);
+        })
+      )
+    );
   }
 
-  public addProduct(product: IProduct): void {
-    this.firebaseService.add<IProduct>(this.productsPath, product);
+  public addProduct(product: Product): Promise<DocumentReference> {
+    const productData = Product.getProductData(product);
+    return this.firebaseService.add<IProductData>(
+      this.productsPath,
+      productData
+    );
   }
 
-  public updateProduct(product: IProduct): void {
-    this.firebaseService.update<IProduct>(this.productsPath, product);
+  public updateProduct(product: Product): Promise<void> {
+    const productData = Product.getProductData(product);
+    return this.firebaseService.update(
+      this.productsPath,
+      product.id,
+      productData
+    );
   }
 
-  public deleteProduct(key: string): void {
-    this.firebaseService.delete<IProduct>(this.productsPath, key);
+  public deleteProduct(id: string): void {
+    this.firebaseService.delete<IProductData>(this.productsPath, id);
   }
 
-  public getProduct(key: string): Observable<IProduct> {
-    return this.firebaseService.get<IProduct>(this.productsPath, key);
+  public getProduct(id: string): Observable<Product> {
+    return this.firebaseService
+      .get<IProductData>(this.productsPath, id)
+      .pipe(map((snapshot) => Product.getProductFromSnapshot(snapshot)));
   }
 }
