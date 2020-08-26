@@ -43,7 +43,7 @@ export class FirebaseService {
 
   public get<T>(path: string, id: string): Observable<DocumentSnapshot<T>> {
     return this.firestore
-      .collection<T>(path)
+      .collection(path)
       .doc<T>(id)
       .snapshotChanges()
       .pipe(

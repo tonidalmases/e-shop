@@ -1,45 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { CartProduct } from 'src/app/models/cart-product';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Cart } from 'src/app/models/cart';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { CartHelper } from '../../helpers/cart.helper';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
-  cartProducts: CartProduct[];
-  cartSubscription: Subscription;
+export class ShoppingCartComponent implements OnInit {
+  cart$: Observable<Cart>;
 
   constructor(private shoppingCartService: ShoppingCartService) {}
 
-  ngOnInit(): void {
-    this.shoppingCartService
-      .getShoppingCart()
-      .then(
-        (cart$) =>
-          (this.cartSubscription = cart$.subscribe(
-            (cart) => (this.cartProducts = cart.products)
-          ))
-      );
-  }
-
-  ngOnDestroy(): void {
-    this.cartSubscription.unsubscribe();
-  }
-
-  get cartQuantity(): number {
-    return CartHelper.getTotalProductsQuantity(this.cartProducts);
-  }
-
-  get totalProductsPrice(): number {
-    return CartHelper.getTotalProductsPrice(this.cartProducts);
-  }
-
-  getTotalProductPrice(cartProduct: CartProduct): number {
-    return CartHelper.getTotalProductPrice(cartProduct);
+  async ngOnInit(): Promise<void> {
+    this.cart$ = await this.shoppingCartService.getShoppingCart();
   }
 
   clearShoppingCart(): void {

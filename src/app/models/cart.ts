@@ -1,61 +1,55 @@
-import { QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { CartProduct } from './cart-product';
-import { IProductData } from './product';
+import {
+  CartProduct,
+  ICartProductData,
+  ICartProductsFirebaseData,
+} from './cart-product';
 
-export interface ICartProductsFirebaseData {
-  [productId: string]: {
-    product: IProductData;
-    quantity: number;
-  };
-}
-
-export interface ICartData {
+export interface ICartFirebaseData {
   dateCreated: number;
   products?: ICartProductsFirebaseData;
 }
 
-export class Cart {
-  id: string;
+export interface ICartData {
   dateCreated: number;
-  products?: CartProduct[];
+  products?: ICartProductData[];
+}
 
-  static getCartFromSnapshot(snapshot: QueryDocumentSnapshot<ICartData>): Cart {
+export class Cart {
+  constructor(
+    public dateCreated: number,
+    public products: CartProduct[],
+    public id?: string
+  ) {}
+
+  get quantity(): number {
+    return this.products
+      ? this.products.reduce(
+          (acc, cartProduct) => acc + (cartProduct.quantity || 0),
+          0
+        )
+      : 0;
+  }
+
+  get price(): number {
+    return this.products
+      ? this.products.reduce(
+          (acc, cartProduct) => acc + (cartProduct.price || 0),
+          0
+        )
+      : 0;
+  }
+
+  static getCart(cartData: ICartData): Cart {
+    return new Cart(
+      cartData.dateCreated,
+      CartProduct.getCartProducts(cartData.products)
+    );
+  }
+
+  static getCartData(cart: Cart): ICartData {
     return {
-      id: snapshot.id,
-      dateCreated: snapshot.data().dateCreated,
+      dateCreated: cart.dateCreated,
+      products: CartProduct.getCartProductsData(cart.products),
     };
   }
-
-  static getCartProducts(products: ICartProductsFirebaseData): CartProduct[] {
-    const cartProducts: CartProduct[] = [];
-    for (const productId in products) {
-      if (productId) {
-        cartProducts.push({
-          id: productId,
-          ...products[productId],
-        });
-      }
-    }
-    return cartProducts;
-  }
-
-  // NOT WORKING
-
-  // getQuantity?(): number {
-  //   return this.products
-  //     ? this.products.reduce(
-  //         (acc, cartProduct) => acc + (cartProduct.quantity || 0),
-  //         0
-  //       )
-  //     : 0;
-  // }
-
-  // getPrice?(): number {
-  //   return this.products
-  //     ? this.products.reduce(
-  //         (acc, cartProduct) => acc + (cartProduct.getPrice() || 0),
-  //         0
-  //       )
-  //     : 0;
-  // }
 }

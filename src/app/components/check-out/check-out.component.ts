@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartHelper } from 'src/app/helpers/cart.helper';
-import { CartProduct } from 'src/app/models/cart-product';
+import { Cart } from 'src/app/models/cart';
 import { Order } from 'src/app/models/order';
 import { Shipping } from 'src/app/models/shipping';
 import { User } from 'src/app/models/user';
@@ -19,7 +18,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 export class CheckOutComponent implements OnInit, OnDestroy {
   formShipping: FormGroup;
 
-  cartProducts: CartProduct[];
+  cart: Cart;
   cartSubscription: Subscription;
 
   user: User;
@@ -32,7 +31,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.formShipping = new FormGroup({
       name: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
@@ -44,14 +43,9 @@ export class CheckOutComponent implements OnInit, OnDestroy {
       country: new FormControl('', Validators.required),
     });
 
-    this.shoppingCartService
-      .getShoppingCart()
-      .then(
-        (cart$) =>
-          (this.cartSubscription = cart$.subscribe(
-            (cart) => (this.cartProducts = cart.products)
-          ))
-      );
+    this.cartSubscription = (
+      await this.shoppingCartService.getShoppingCart()
+    ).subscribe((cart) => (this.cart = cart));
 
     this.userSubscription = this.authService.user$.subscribe(
       (user) => (this.user = user)
@@ -59,32 +53,19 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cartSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 
-  get cartQuantity(): number {
-    return CartHelper.getTotalProductsQuantity(this.cartProducts);
-  }
-
-  get totalProductsPrice(): number {
-    return CartHelper.getTotalProductsPrice(this.cartProducts);
-  }
-
-  getTotalProductPrice(cartProduct: CartProduct): number {
-    return CartHelper.getTotalProductPrice(cartProduct);
-  }
-
   placeOrder(): void {
-    if (this.formShipping.valid) {
-      const order: Order = {
-        user: this.user,
-        shipping: this.formShipping.value as Shipping,
-        cartProducts: this.cartProducts,
-        dateOrder: new Date().getTime(),
-      };
-      this.orderService.placeOrder(order).then((dr) => {
-        this.router.navigate(['/order-success', dr.id]);
+    if (this.formShipping.valid && this.cart && this.user) {
+      const order = new Order(
+        new Date().getTime(),
+        this.user,
+        this.formShipping.value as Shipping,
+        this.cart
+      );
+      this.orderService.placeOrder(order).then((orderId) => {
+        this.router.navigate(['/order-success', orderId]);
       });
     }
   }

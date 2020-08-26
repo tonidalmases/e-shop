@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { IOrderData, Order } from '../models/order';
@@ -19,13 +18,13 @@ export class OrderService {
     private authService: AuthService
   ) {}
 
-  placeOrder(order: Order): Promise<DocumentReference> {
+  async placeOrder(order: Order): Promise<string> {
     const orderData = Order.getOrderData(order);
-    const orderReference = this.firebaseService.add(this.ordersPath, orderData);
 
+    const dr = await this.firebaseService.add(this.ordersPath, orderData);
     this.shoppingCartService.clearShoppingCart();
 
-    return orderReference;
+    return dr.id;
   }
 
   getOrder(id: string): Observable<Order> {

@@ -70,13 +70,13 @@
         <div class="card-body">
           <table class="table">
             <tbody>
-              <tr *ngFor="let cartProduct of order.cartProducts">
+              <tr *ngFor="let cartProduct of order.cart.products">
                 <td>
                   {{ cartProduct.quantity }} x {{ cartProduct.product.name }}
                 </td>
                 <td>
                   <span class="float-right">{{
-                    getTotalProductPrice(cartProduct) | currency: "EUR"
+                    cartProduct.price | currency: "EUR"
                   }}</span>
                 </td>
               </tr>
@@ -84,7 +84,7 @@
                 <td>Total</td>
                 <td>
                   <span class="float-right">{{
-                    getTotalProductsPrice(order.cartProducts) | currency: "EUR"
+                    order.cart.price | currency: "EUR"
                   }}</span>
                 </td>
               </tr>

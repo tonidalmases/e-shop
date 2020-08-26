@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Cart } from 'src/app/models/cart';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { CartHelper } from '../../helpers/cart.helper';
 
 @Component({
   selector: 'app-navbar',
@@ -15,8 +14,7 @@ import { CartHelper } from '../../helpers/cart.helper';
 export class NavbarComponent implements OnInit {
   isMenuCollapsed = true;
   user$: Observable<User>;
-
-  cartQuantity$: Observable<number>;
+  cart$: Observable<Cart>;
 
   constructor(
     private router: Router,
@@ -27,9 +25,7 @@ export class NavbarComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.cartQuantity$ = (
-      await this.shoppingCartService.getShoppingCart()
-    ).pipe(map((cart) => CartHelper.getTotalProductsQuantity(cart.products)));
+    this.cart$ = await this.shoppingCartService.getShoppingCart();
   }
 
   navigateTo(path: string): void {

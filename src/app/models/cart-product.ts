@@ -1,31 +1,50 @@
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { IProductData, Product } from './product';
 
+export interface ICartProductsFirebaseData {
+  [productId: string]: {
+    product: IProductData;
+    quantity: number;
+  };
+}
+
 export interface ICartProductData {
   product: IProductData;
   quantity: number;
 }
 
 export class CartProduct {
-  id?: string;
-  product: Product;
-  quantity: number;
+  constructor(
+    public product: Product,
+    public quantity: number,
+    public id?: string
+  ) {}
+
+  get price(): number {
+    return this.quantity * this.product.price;
+  }
 
   static getCartProductFromSnapshot(
     snapshot: QueryDocumentSnapshot<ICartProductData>
   ): CartProduct {
-    return {
-      id: snapshot.id,
-      product: Product.getProduct(snapshot.data().product),
-      quantity: snapshot.data().quantity,
-    };
+    return new CartProduct(
+      Product.getProduct(snapshot.data().product),
+      snapshot.data().quantity,
+      snapshot.id
+    );
   }
 
   static getCartProduct(cartProductData: ICartProductData): CartProduct {
-    return {
-      product: Product.getProduct(cartProductData.product),
-      quantity: cartProductData.quantity,
-    };
+    return new CartProduct(
+      Product.getProduct(cartProductData.product),
+      cartProductData.quantity
+    );
+  }
+
+  static getCartProducts(cartProductsData: ICartProductData[]): CartProduct[] {
+    return cartProductsData
+      ? cartProductsData.map((cpd) => CartProduct.getCartProduct(cpd))
+      : [];
   }
 
   static getCartProductData(cartProduct: CartProduct): ICartProductData {
@@ -35,9 +54,9 @@ export class CartProduct {
     };
   }
 
-  // NOT WORKING
-
-  // getPrice?(): number {
-  //   return this.quantity * this.product.price;
-  // }
+  static getCartProductsData(cartProducts: CartProduct[]): ICartProductData[] {
+    return cartProducts
+      ? cartProducts.map((cp) => CartProduct.getCartProductData(cp))
+      : [];
+  }
 }

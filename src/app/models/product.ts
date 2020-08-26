@@ -9,31 +9,33 @@ export interface IProductData {
 }
 
 export class Product {
-  id?: string;
-  name: string;
-  price: number;
-  category: Category;
-  pictureUrl: string;
+  constructor(
+    public name: string,
+    public price: number,
+    public category: Category,
+    public pictureUrl: string,
+    public id?: string
+  ) {}
 
   static getProductFromSnapshot(
     snapshot: QueryDocumentSnapshot<IProductData>
   ): Product {
-    return {
-      id: snapshot.id,
-      name: snapshot.data().name,
-      price: snapshot.data().price,
-      category: Category.getCategory(snapshot.data().category),
-      pictureUrl: snapshot.data().pictureUrl,
-    };
+    return new Product(
+      snapshot.data().name,
+      snapshot.data().price,
+      Category.getCategory(snapshot.data().category),
+      snapshot.data().pictureUrl,
+      snapshot.id
+    );
   }
 
   static getProduct(productData: IProductData): Product {
-    return {
-      name: productData.name,
-      price: productData.price,
-      category: Category.getCategory(productData.category),
-      pictureUrl: productData.pictureUrl,
-    };
+    return new Product(
+      productData.name,
+      productData.price,
+      Category.getCategory(productData.category),
+      productData.pictureUrl
+    );
   }
 
   static getProductData(product: Product): IProductData {

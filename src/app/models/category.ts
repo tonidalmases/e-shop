@@ -5,22 +5,16 @@ export interface ICategoryData {
 }
 
 export class Category {
-  id?: string;
-  name: string;
+  constructor(public name: string, public id?: string) {}
 
   static getCategoryFromSnapshot(
     snapshot: QueryDocumentSnapshot<ICategoryData>
   ): Category {
-    return {
-      id: snapshot.id,
-      name: snapshot.data().name,
-    };
+    return new Category(snapshot.data().name, snapshot.id);
   }
 
   static getCategory(categoryData: ICategoryData): Category {
-    return {
-      name: categoryData.name,
-    };
+    return new Category(categoryData.name);
   }
 
   static getCategoryData(category: Category): ICategoryData {

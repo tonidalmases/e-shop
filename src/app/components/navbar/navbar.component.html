@@ -13,9 +13,11 @@
     <ul ngbNav class="navbar-nav mr-auto">
       <li ngbNavItem class="d-flex align-items-center">
         <a ngbNavLink (click)="navigateTo('/shopping-cart')">Shopping cart</a>
-        <span class="badge badge-pill badge-primary">{{
-          cartQuantity$ | async
-        }}</span>
+        <span
+          class="badge badge-pill badge-primary"
+          *ngIf="cart$ | async as cart"
+          >{{ cart.quantity }}</span
+        >
       </li>
       <li
         *ngIf="user$ | async as user; else anonymousUser"

@@ -7,22 +7,14 @@ export interface IShippingData {
 }
 
 export class Shipping {
-  id?: string;
-  name: string;
-  address: string;
-  city: string;
-  zipCode: string;
-  country: string;
-
-  static getShippingData(shipping: Shipping): IShippingData {
-    return {
-      name: shipping.name,
-      address: shipping.address,
-      city: shipping.city,
-      zipCode: shipping.zipCode,
-      country: shipping.country,
-    };
-  }
+  constructor(
+    public name: string,
+    public address: string,
+    public city: string,
+    public zipCode: string,
+    public country: string,
+    public id?: string
+  ) {}
 
   static getShipping(shippingData: IShippingData): Shipping {
     return {
@@ -31,6 +23,16 @@ export class Shipping {
       city: shippingData.city,
       zipCode: shippingData.zipCode,
       country: shippingData.country,
+    };
+  }
+
+  static getShippingData(shipping: Shipping): IShippingData {
+    return {
+      name: shipping.name,
+      address: shipping.address,
+      city: shipping.city,
+      zipCode: shipping.zipCode,
+      country: shipping.country,
     };
   }
 }

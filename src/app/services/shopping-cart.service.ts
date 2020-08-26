@@ -75,19 +75,21 @@ export class ShoppingCartService {
       .get<ICartData>(this.shoppingCartsPath, cartId)
       .pipe(
         switchMap((snapshotCart) => {
-          const cart = Cart.getCartFromSnapshot(snapshotCart);
           return this.firebaseService
             .list<ICartProductData>(
               this.shoppingCartsPath + cartId + this.shoppingCartProductsPath
             )
             .pipe(
               map((snapshotCartProducts) => {
-                return {
-                  ...cart,
-                  products: snapshotCartProducts.map((scp) =>
-                    CartProduct.getCartProductFromSnapshot(scp)
-                  ),
-                } as Cart;
+                const products = snapshotCartProducts.map((scp) =>
+                  CartProduct.getCartProductFromSnapshot(scp)
+                );
+
+                return new Cart(
+                  snapshotCart.data().dateCreated,
+                  products,
+                  snapshotCart.id
+                );
               })
             );
         })

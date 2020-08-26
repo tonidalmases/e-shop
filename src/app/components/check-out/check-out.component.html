@@ -73,21 +73,21 @@
     </form>
   </div>
   <div class="col">
-    <div class="card">
+    <div class="card" *ngIf="cart">
       <div class="card-body">
         <h5 class="card-title">Order summary</h5>
         <p class="card-text"></p>
-        <p>You have {{ cartQuantity }} products in the cart.</p>
+        <p>You have {{ cart.quantity }} products in the cart.</p>
 
         <table class="table">
           <tbody>
-            <tr *ngFor="let cartProduct of cartProducts">
+            <tr *ngFor="let cartProduct of cart.products">
               <td>
                 {{ cartProduct.quantity }} x {{ cartProduct.product.name }}
               </td>
               <td>
                 <span class="float-right">{{
-                  getTotalProductPrice(cartProduct) | currency: "EUR"
+                  cartProduct.price | currency: "EUR"
                 }}</span>
               </td>
             </tr>
@@ -95,7 +95,7 @@
               <td>Total</td>
               <td>
                 <span class="float-right">{{
-                  totalProductsPrice | currency: "EUR"
+                  cart.price | currency: "EUR"
                 }}</span>
               </td>
             </tr>

@@ -1,5 +1,5 @@
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { CartProduct, ICartProductData } from './cart-product';
+import { Cart, ICartData } from './cart';
 import { IShippingData, Shipping } from './shipping';
 import { IUserDataId, User } from './user';
 
@@ -7,28 +7,28 @@ export interface IOrderData {
   dateOrder: number;
   user: IUserDataId;
   shipping: IShippingData;
-  cartProducts: ICartProductData[];
+  cart: ICartData;
 }
 
 export class Order {
-  id?: string;
-  dateOrder: number;
-  user: User;
-  shipping: Shipping;
-  cartProducts: CartProduct[];
+  constructor(
+    public dateOrder: number,
+    public user: User,
+    public shipping: Shipping,
+    public cart: Cart,
+    public id?: string
+  ) {}
 
   static getOrderFromSnapshot(
     snapshot: QueryDocumentSnapshot<IOrderData>
   ): Order {
-    return {
-      id: snapshot.id,
-      dateOrder: snapshot.data().dateOrder,
-      user: User.getUserWithId(snapshot.data().user),
-      shipping: Shipping.getShipping(snapshot.data().shipping),
-      cartProducts: snapshot
-        .data()
-        .cartProducts.map((cp) => CartProduct.getCartProduct(cp)),
-    };
+    return new Order(
+      snapshot.data().dateOrder,
+      User.getUserWithId(snapshot.data().user),
+      Shipping.getShipping(snapshot.data().shipping),
+      Cart.getCart(snapshot.data().cart),
+      snapshot.id
+    );
   }
 
   static getOrderData(order: Order): IOrderData {
@@ -36,9 +36,7 @@ export class Order {
       dateOrder: order.dateOrder,
       user: User.getUserDataWithId(order.user),
       shipping: Shipping.getShippingData(order.shipping),
-      cartProducts: order.cartProducts.map((cp) =>
-        CartProduct.getCartProductData(cp)
-      ),
+      cart: Cart.getCartData(order.cart),
     };
   }
 }

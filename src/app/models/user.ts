@@ -14,27 +14,29 @@ export interface IUserDataId {
 }
 
 export class User {
-  id?: string;
-  name: string;
-  email: string;
-  isAdmin: boolean;
+  constructor(
+    public name: string,
+    public email: string,
+    public isAdmin: boolean,
+    public id?: string
+  ) {}
 
   static getUserFromSnapshot(snapshot: DocumentSnapshot<IUserData>): User {
-    return {
-      id: snapshot.id,
-      name: snapshot.data().name,
-      email: snapshot.data().email,
-      isAdmin: snapshot.data().isAdmin,
-    };
+    return new User(
+      snapshot.data().name,
+      snapshot.data().email,
+      snapshot.data().isAdmin,
+      snapshot.id
+    );
   }
 
   static getUserWithId(userData: IUserDataId): User {
-    return {
-      id: userData.id,
-      name: userData.name,
-      email: userData.email,
-      isAdmin: userData.isAdmin,
-    };
+    return new User(
+      userData.name,
+      userData.email,
+      userData.isAdmin,
+      userData.id
+    );
   }
 
   static getUserDataWithId(user: User): IUserDataId {
