@@ -12,18 +12,17 @@ export class Shipping {
     public address: string,
     public city: string,
     public zipCode: string,
-    public country: string,
-    public id?: string
+    public country: string
   ) {}
 
   static getShipping(shippingData: IShippingData): Shipping {
-    return {
-      name: shippingData.name,
-      address: shippingData.address,
-      city: shippingData.city,
-      zipCode: shippingData.zipCode,
-      country: shippingData.country,
-    };
+    return new Shipping(
+      shippingData.name,
+      shippingData.address,
+      shippingData.city,
+      shippingData.zipCode,
+      shippingData.country
+    );
   }
 
   static getShippingData(shipping: Shipping): IShippingData {
