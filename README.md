@@ -1,27 +1,20 @@
-# EShop
+# E-Shop
+
+Implementation of the [Organic shop](https://github.com/mosh-hamedani/organic-shop) proposed by Mosh Hamedani for the course [The Complete Angular Course: Beginner to Advanced](https://www.udemy.com/course/the-complete-angular-master-class/):
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
+
+I propose the use of different tools and libraries as a complement for the shop, so the implementation is not exactly the same as in the course:
+
+- Use of the official Angular library for Firebase [@angular/fire](https://www.npmjs.com/package/@angular/fire).
+- Latest implementation of Firestore that allows more scalability, instead of the traditional Firebase database.
+- Implementation of Redux by using [@ngrx/store](https://ngrx.io/guide/store) in order to centralize the shopping cart.
+- Non-modularization of the application. I consider not necessary to modularize a small application. Moreover, Mosh proposes a modularization which services have strong dependency with other modules. However, I consider a module as independent and self-contained unit that can be easily copy-pasted to other projects.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
