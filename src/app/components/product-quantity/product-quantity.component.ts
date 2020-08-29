@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/product';
-import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { AppState } from 'src/app/store/app.store';
+import { CartActions } from 'src/app/store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-quantity',
@@ -14,13 +16,13 @@ export class ProductQuantityComponent {
   @Input()
   quantity: number;
 
-  constructor(private shoppingCartService: ShoppingCartService) {}
+  constructor(private store: Store<AppState>) {}
 
   addProduct(): void {
-    this.shoppingCartService.addToCart(this.product);
+    this.store.dispatch(CartActions.addProduct({ product: this.product }));
   }
 
   removeProduct(): void {
-    this.shoppingCartService.removeFromCart(this.product);
+    this.store.dispatch(CartActions.removeProduct({ product: this.product }));
   }
 }

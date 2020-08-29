@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ngrx/effects": "^10.0.0",
+    "@ngrx/store": "^10.0.0",
     "bootstrap": "^4.5.0",
     "firebase": "^7.17.1",
     "rxjs": "~6.5.5",

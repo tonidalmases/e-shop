@@ -6,24 +6,24 @@ import {
 
 export interface ICartFirebaseData {
   dateCreated: number;
-  products?: ICartProductsFirebaseData;
+  cartProducts?: ICartProductsFirebaseData;
 }
 
 export interface ICartData {
   dateCreated: number;
-  products?: ICartProductData[];
+  cartProducts?: ICartProductData[];
 }
 
 export class Cart {
   constructor(
     public dateCreated: number,
-    public products: CartProduct[],
+    public cartProducts: CartProduct[],
     public id?: string
   ) {}
 
   get quantity(): number {
-    return this.products
-      ? this.products.reduce(
+    return this.cartProducts
+      ? this.cartProducts.reduce(
           (acc, cartProduct) => acc + (cartProduct.quantity || 0),
           0
         )
@@ -31,8 +31,8 @@ export class Cart {
   }
 
   get price(): number {
-    return this.products
-      ? this.products.reduce(
+    return this.cartProducts
+      ? this.cartProducts.reduce(
           (acc, cartProduct) => acc + (cartProduct.price || 0),
           0
         )
@@ -42,14 +42,14 @@ export class Cart {
   static getCart(cartData: ICartData): Cart {
     return new Cart(
       cartData.dateCreated,
-      CartProduct.getCartProducts(cartData.products)
+      CartProduct.getCartProducts(cartData.cartProducts)
     );
   }
 
   static getCartData(cart: Cart): ICartData {
     return {
       dateCreated: cart.dateCreated,
-      products: CartProduct.getCartProductsData(cart.products),
+      cartProducts: CartProduct.getCartProductsData(cart.cartProducts),
     };
   }
 }
