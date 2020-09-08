@@ -7,11 +7,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 I propose the use of different tools and libraries as a complement for the shop, so the implementation is not exactly the same as in the course:
 
 - Use of the official Angular library for Firebase [@angular/fire](https://www.npmjs.com/package/@angular/fire).
-- Latest implementation of Firestore that allows more scalability, instead of the traditional Firebase database.
+- Latest implementation of [Cloud Firestore](https://firebase.google.com/docs/firestore) that allows more scalability, instead of the traditional [Firebase Realtime Database](https://firebase.google.com/docs/database).
 - Implementation of Redux by using [@ngrx/store](https://ngrx.io/guide/store) in order to centralize the shopping cart.
 - Non-modularization of the application. I consider not necessary to modularize a small application. Moreover, Mosh proposes a modularization which services have strong dependency with other modules. However, I consider a module as independent and self-contained unit that can be easily copy-pasted to other projects.
 
 ## Development server
+
+Create the `environments/environment.ts` file and provide your `firebase` configuration.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
