@@ -5,6 +5,7 @@ import { Order } from '../models/order';
 import { Product } from '../models/product';
 import { Shipping } from '../models/shipping';
 import { User } from '../models/user';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 export class FakeModels {
   public static getOrders(): Order[] {
@@ -53,5 +54,17 @@ export class FakeModels {
 
   public static getCategory(): Category {
     return new Category('categoryName', 'categoryId');
+  }
+
+  public static getCategories(): Category[] {
+    return [this.getCategory()];
+  }
+
+  public static getActivatedRouteSnapshot(param: string): any {
+    return {
+      paramMap: {
+        get: (id: string) => param,
+      },
+    };
   }
 }

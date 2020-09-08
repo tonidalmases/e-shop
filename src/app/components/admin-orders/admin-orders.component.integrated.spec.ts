@@ -2,10 +2,10 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from 'src/app/services/order.service';
 import { MockOrderService } from '../../testing/mock-order.service';
-import { MockRouterLinkDirective } from '../../testing/mock-router-link.directive';
 import { AdminOrdersComponent } from './admin-orders.component';
 
 describe('AdminOrdersComponent: Integrated', () => {
@@ -17,12 +17,12 @@ describe('AdminOrdersComponent: Integrated', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminOrdersComponent, MockRouterLinkDirective],
+      declarations: [AdminOrdersComponent],
       providers: [
         MockOrderService,
         { provide: OrderService, useClass: MockOrderService },
       ],
-      imports: [FormsModule, NgbModule],
+      imports: [FormsModule, NgbModule, RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminOrdersComponent);
@@ -34,10 +34,11 @@ describe('AdminOrdersComponent: Integrated', () => {
 
   it('should create', () => {
     fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 
-  it('should contain a table with at least 2 rows', () => {
+  it('should contain a table with more than 1 row', () => {
     fixture.detectChanges();
 
     const rows = debugElement.queryAll(By.css('tr'));

@@ -31,7 +31,7 @@ export class AdminProductComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.categoryService.getCategories();
 
-    this.productId = this.route.snapshot.paramMap.get('id');
+    this.productId = this.getProductId();
 
     if (this.productId) {
       this.productService.getProduct(this.productId).subscribe((p) => {
@@ -42,7 +42,11 @@ export class AdminProductComponent implements OnInit {
     }
   }
 
-  private initForm(
+  getProductId(): string {
+    return this.route.snapshot.paramMap.get('id');
+  }
+
+  initForm(
     name: string,
     price: number | null,
     category: Category,

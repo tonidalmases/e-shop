@@ -3,7 +3,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { FakeModels } from 'src/app/testing/fake-models';
 import { AdminOrdersComponent } from './admin-orders.component';
 
-describe('AdminOrdersComponent: Integrated', () => {
+describe('AdminOrdersComponent: Unit', () => {
   let component: AdminOrdersComponent;
 
   let orderServiceSpy: jasmine.SpyObj<OrderService>;
