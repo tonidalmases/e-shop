@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="ca-ES" datatype="plaintext" original="ng2.template">
+    <body>
+      
+      <!-- NGB -->
+
+      <trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{getValue() / max | percent}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getAfternoonPeriod() }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getMorningPeriod() }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.toast.close-aria" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/toast/toast.d.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+
+      <!-- E-SHOP -->
+
+      <trans-unit id="e-shop.shopping-cart.title" datatype="html">
+        <source>Shopping cart</source>
+        <target>Carret de compra</target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.description" datatype="html">
+        <source>
+          You have <x id="INTERPOLATION" equiv-text="{{ cart.quantity }}"/> products in the cart.
+        </source>
+        <target>
+          Tens <x id="INTERPOLATION" equiv-text="{{ cart.quantity }}"/> productes al carret de compra.
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.clear-shopping-cart" datatype="html">
+        <source>
+          Clear shopping cart
+        </source>
+        <target>
+          Netejar carret de compra
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.table.header.product" datatype="html">
+        <source>
+          Product
+        </source>
+        <target>
+          Producte
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.table.header.quantity" datatype="html">
+        <source>
+          Quantity
+        </source>
+        <target>
+          Quantitat
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.table.header.price" datatype="html">
+        <source>
+          Price
+        </source>
+        <target>
+          Preu
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.shopping-cart.check-out" datatype="html">
+        <source>
+          Check out
+        </source>
+        <target>
+          Comprar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.shipping" datatype="html">
+        <source>Shipping</source>
+        <target>Enviament</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.form.name" datatype="html">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.form.address" datatype="html">
+        <source>Address</source>
+        <target>Adreça</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.form.city" datatype="html">
+        <source>City</source>
+        <target>Ciutat</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.form.zip-code" datatype="html">
+        <source>Zip code</source>
+        <target>Codi postal</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.form.country" datatype="html">
+        <source>Country</source>
+        <target>Païs</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.summary.title" datatype="html">
+        <source>
+          Order summary
+        </source>
+        <target>
+          Realitzar comanda
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.summary.cart-products" datatype="html">
+        <source>
+          You have <x id="INTERPOLATION" equiv-text="{{ cart.quantity }}"/> products in the cart.
+        </source>
+        <target>
+          Tens <x id="INTERPOLATION" equiv-text="{{ cart.quantity }}"/> productes al carret de compra.
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.summary.table.body.total" datatype="html">
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="e-shop.check-out.place-order" datatype="html">
+        <source>
+          Place order
+        </source>
+        <target>
+          Fer la comanda
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.title" datatype="html">
+        <source>Order information</source>
+        <target>Informació de la comanda</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.description" datatype="html">
+        <source>
+          The order <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ order.id }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> was successfuly registered on:
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </source>
+        <target>
+          La comanda <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ order.id }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> es va registrar amb èxit el:
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.shipping.name" datatype="html">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.shipping.address" datatype="html">
+        <source>Address</source>
+        <target>Adreça</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.shipping.country" datatype="html">
+        <source>Country</source>
+        <target>Païs</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.shipping.city" datatype="html">
+        <source>City</source>
+        <target>Ciutat</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.shipping.zip-code" datatype="html">
+        <source>Zip</source>
+        <target>Codi postal</target>
+      </trans-unit>
+      <trans-unit id="e-shop.order-success.table.body.total" datatype="html">
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="e-shop.my-orders.table.header.date" datatype="html">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="e-shop.my-orders.table.body.date" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/>
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.my-orders.table.body.view" datatype="html">
+        <source>View</source>
+        <target>Detall</target>
+      </trans-unit>
+      <trans-unit id="e-shop.my-orders.items-per-page" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> items per page
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> elements per pàgina
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.new-product" datatype="html">
+        <source>
+          New product
+        </source>
+        <target>
+          Nou producte
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.table.header.name" datatype="html">
+        <source>
+          Name
+        </source>
+        <target>
+          Nom
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.table.header.price" datatype="html">
+        <source>
+          Price
+        </source>
+        <target>
+          Preu
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.table.header.category" datatype="html">
+        <source>
+          Category
+        </source>
+        <target>
+          Categoria
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.table.body.edit" datatype="html">
+        <source>Edit</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-products.items-per-page" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> items per page
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> elements per pàgina
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-orders.table.header.user" datatype="html">
+        <source>User</source>
+        <target>Usuari</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-orders.table.header.date" datatype="html">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-orders.table.body-date" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/>
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ order.dateOrder | date: &quot;dd/MM/yyyy - HH:mm&quot; }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-orders.table.body-view" datatype="html">
+        <source>View</source>
+        <target>Detall</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-orders.items-per-page" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> items per page
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ items }}"/> elements per pàgina
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.login.login-with-google" datatype="html">
+        <source>
+          Login with google
+        </source>
+        <target>
+          Entrar amb google
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.title" datatype="html">
+        <source>E-shop</source>
+        <target>E-shop</target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.shopping-cart" datatype="html">
+        <source>Shopping cart</source>
+        <target>Carret de compra</target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.my-orders" datatype="html">
+        <source>
+          My orders
+        </source>
+        <target>
+          Les meves comandes
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.manage-orders" datatype="html">
+        <source>
+          Manage orders
+        </source>
+        <target>
+          Gestionar comandes
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.manage-products" datatype="html">
+        <source>
+          Manage products
+        </source>
+        <target>
+          Gestionar productes
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.logout" datatype="html">
+        <source>
+          Logout
+        </source>
+        <target>
+          Logout
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.navbar.login" datatype="html">
+        <source>Login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="e-shop.confirmation-dialog.cancel" datatype="html">
+        <source>
+          Cancel
+        </source>
+        <target>
+          Cancel·lar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.confirmation-dialog.confirm" datatype="html">
+        <source>
+          Confirm
+        </source>
+        <target>
+          Confirmar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.name" datatype="html">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.price" datatype="html">
+        <source>Price</source>
+        <target>Preu</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.category" datatype="html">
+        <source>Category</source>
+        <target>Categoria</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.picture-url" datatype="html">
+        <source>Picture URL</source>
+        <target>URL imatge</target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.save" datatype="html">
+        <source>
+          Save
+        </source>
+        <target>
+          Desar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.cancel" datatype="html">
+        <source>
+          Cancel
+        </source>
+        <target>
+          Cancel·lar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.admin-product.form.delete" datatype="html">
+        <source>
+          Delete
+        </source>
+        <target>
+          Eliminar
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.product-quantity.add-to-cart" datatype="html">
+        <source>
+          Add to cart
+        </source>
+        <target>
+          Afegir al carret
+        </target>
+      </trans-unit>
+      <trans-unit id="e-shop.product-quantity.items-in-cart" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ quantity }}"/> items in cart</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ quantity }}"/> elements al carret</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

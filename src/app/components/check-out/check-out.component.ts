@@ -54,6 +54,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.cartSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 

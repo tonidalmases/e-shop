@@ -1,29 +1,36 @@
-<h3>Shopping cart</h3>
+<h3 i18n="@@e-shop.shopping-cart.title">Shopping cart</h3>
 
 <div *ngIf="cart$ | async as cart">
-  <p>
+  <p i18n="@@e-shop.shopping-cart.description">
     You have {{ cart.quantity }} products in the cart.
-    <button
-      *ngIf="cart.quantity > 0"
-      class="btn btn-sm btn-light"
-      (click)="clearShoppingCart()"
-    >
-      Clear shopping cart
-    </button>
   </p>
+  <button
+    *ngIf="cart.quantity > 0"
+    class="btn btn-sm btn-light"
+    (click)="clearShoppingCart()"
+    i18n="@@e-shop.shopping-cart.clear-shopping-cart"
+  >
+    Clear shopping cart
+  </button>
 
   <div *ngIf="cart.quantity > 0">
-    <table class="table table-striped" *ngIf="cart.products">
+    <table class="table table-striped" *ngIf="cart.cartProducts">
       <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col">Product</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
+          <th scope="col" i18n="@@e-shop.shopping-cart.table.header.product">
+            Product
+          </th>
+          <th scope="col" i18n="@@e-shop.shopping-cart.table.header.quantity">
+            Quantity
+          </th>
+          <th scope="col" i18n="@@e-shop.shopping-cart.table.header.price">
+            Price
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cartProduct of cart.products">
+        <tr *ngFor="let cartProduct of cart.cartProducts">
           <td>
             <div
               [style.backgroundImage]="
@@ -50,7 +57,11 @@
       </tbody>
     </table>
 
-    <button class="btn btn-primary" [routerLink]="['/check-out']">
+    <button
+      class="btn btn-primary"
+      [routerLink]="['/check-out']"
+      i18n="@@e-shop.shopping-cart.check-out"
+    >
       Check out
     </button>
   </div>

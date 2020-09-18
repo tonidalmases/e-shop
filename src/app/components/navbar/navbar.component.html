@@ -1,5 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a class="navbar-brand" (click)="navigateTo('/')" role="button">E-shop</a>
+  <a
+    class="navbar-brand"
+    (click)="navigateTo('/')"
+    role="button"
+    i18n="@@e-shop.navbar.title"
+    >E-shop</a
+  >
 
   <button
     class="navbar-toggler"
@@ -12,7 +18,12 @@
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
     <ul ngbNav class="navbar-nav mr-auto">
       <li ngbNavItem class="d-flex align-items-center">
-        <a ngbNavLink (click)="navigateTo('/shopping-cart')">Shopping cart</a>
+        <a
+          ngbNavLink
+          (click)="navigateTo('/shopping-cart')"
+          i18n="@@e-shop.navbar.shopping-cart"
+          >Shopping cart</a
+        >
         <span
           class="badge badge-pill badge-primary"
           *ngIf="cart$ | async as cart"
@@ -28,25 +39,46 @@
           {{ user.name }}
         </button>
         <div ngbDropdownMenu aria-labelledby="userDropdown">
-          <button ngbDropdownItem (click)="navigateTo('/my-orders')">
+          <button
+            ngbDropdownItem
+            (click)="navigateTo('/my-orders')"
+            i18n="@@e-shop.navbar.my-orders"
+          >
             My orders
           </button>
           <ng-container *ngIf="user.isAdmin">
-            <button ngbDropdownItem (click)="navigateTo('/admin/orders')">
+            <button
+              ngbDropdownItem
+              (click)="navigateTo('/admin/orders')"
+              i18n="@@e-shop.navbar.manage-orders"
+            >
               Manage orders
             </button>
-            <button ngbDropdownItem (click)="navigateTo('/admin/products')">
+            <button
+              ngbDropdownItem
+              (click)="navigateTo('/admin/products')"
+              i18n="@@e-shop.navbar.manage-products"
+            >
               Manage products
             </button>
           </ng-container>
-          <button ngbDropdownItem (click)="logout()">
+          <button
+            ngbDropdownItem
+            (click)="logout()"
+            i18n="@@e-shop.navbar.logout"
+          >
             Logout
           </button>
         </div>
       </li>
       <ng-template #anonymousUser>
         <li ngbNavItem>
-          <a ngbNavLink (click)="navigateTo('/login')">Login</a>
+          <a
+            ngbNavLink
+            (click)="navigateTo('/login')"
+            i18n="@@e-shop.navbar.login"
+            >Login</a
+          >
         </li>
       </ng-template>
     </ul>

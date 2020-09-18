@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col">Date</th>
+        <th scope="col" i18n="@@e-shop.my-orders.table.header.date">Date</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -17,9 +17,15 @@
         "
       >
         <td>{{ (page - 1) * pageSize + i + 1 }}</td>
-        <td>{{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}</td>
+        <td i18n="@@e-shop.my-orders.table.body.date">
+          {{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}
+        </td>
         <td>
-          <a [routerLink]="['/order-success/', order.id]">View</a>
+          <a
+            [routerLink]="['/order-success/', order.id]"
+            i18n="@@e-shop.my-orders.table.body.view"
+            >View</a
+          >
         </td>
       </tr>
     </tbody>
@@ -34,13 +40,17 @@
 
     <select
       class="custom-select"
-      style="width: auto;"
+      style="width: auto"
       name="pageSize"
       [(ngModel)]="pageSize"
     >
-      <option *ngFor="let items of itemsPerPage" [value]="items"
-        >{{ items }} items per page</option
+      <option
+        *ngFor="let items of itemsPerPage"
+        [value]="items"
+        i18n="@@e-shop.my-orders.items-per-page"
       >
+        {{ items }} items per page
+      </option>
     </select>
   </div>
 </div>

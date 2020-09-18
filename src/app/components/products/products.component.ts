@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private initCartProducts(): void {
-    this.store
+    this.cartSubscription = this.store
       .select((s) => s.cart.cart)
       .subscribe((cart) => (this.cart = cart));
   }

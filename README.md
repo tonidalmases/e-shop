@@ -10,6 +10,7 @@ I propose the use of different tools and libraries as a complement for the shop,
 - Latest implementation of [Cloud Firestore](https://firebase.google.com/docs/firestore) that allows more scalability, instead of the traditional [Firebase Realtime Database](https://firebase.google.com/docs/database).
 - Implementation of Redux by using [@ngrx/store](https://ngrx.io/guide/store) in order to centralize the shopping cart.
 - Non-modularization of the application. I consider not necessary to modularize a small application. Moreover, Mosh proposes a modularization which services have strong dependency with other modules. However, I consider a module as independent and self-contained unit that can be easily copy-pasted to other projects.
+- Internationalization (i18n) to Catalan by using [@angular/localize](https://angular.io/guide/i18n)
 
 ## Development server
 

@@ -3,12 +3,17 @@
     class="btn btn-secondary btn-add-to-cart"
     (click)="addProduct()"
     *ngIf="quantity === 0; else addRemoveButtons"
+    i18n="@@e-shop.product-quantity.add-to-cart"
   >
     Add to cart
   </a>
   <ng-template #addRemoveButtons>
     <a class="btn btn-secondary btn-add-remove" (click)="removeProduct()">-</a>
-    <span class="align-self-center">{{ quantity }} items in cart</span>
+    <span
+      class="align-self-center"
+      i18n="@@e-shop.product-quantity.items-in-cart"
+      >{{ quantity }} items in cart</span
+    >
     <a class="btn btn-secondary btn-add-remove" (click)="addProduct()">+</a>
   </ng-template>
 </div>

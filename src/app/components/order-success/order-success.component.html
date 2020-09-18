@@ -1,6 +1,6 @@
 <div *ngIf="order$ | async as order">
-  <h3>Order information</h3>
-  <p>
+  <h3 i18n="@@e-shop.order-success.title">Order information</h3>
+  <p i18n="@@e-shop.order-success.description">
     The order <strong>{{ order.id }}</strong> was successfuly registered on:
     <strong>{{ order.dateOrder | date: "dd/MM/yyyy - HH:mm" }}</strong>
   </p>
@@ -10,7 +10,9 @@
       <div class="card">
         <div class="card-body">
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name" i18n="@@e-shop.order-success.shipping.name"
+              >Name</label
+            >
             <input
               type="text"
               class="form-control"
@@ -20,7 +22,9 @@
             />
           </div>
           <div class="form-group">
-            <label for="address">Address</label>
+            <label for="address" i18n="@@e-shop.order-success.shipping.address"
+              >Address</label
+            >
             <input
               type="text"
               class="form-control"
@@ -31,7 +35,11 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="country">Country</label>
+              <label
+                for="country"
+                i18n="@@e-shop.order-success.shipping.country"
+                >Country</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -41,7 +49,9 @@
               />
             </div>
             <div class="form-group col-md-4">
-              <label for="city">City</label>
+              <label for="city" i18n="@@e-shop.order-success.shipping.city"
+                >City</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -51,7 +61,11 @@
               />
             </div>
             <div class="form-group col-md-2">
-              <label for="zipCode">Zip</label>
+              <label
+                for="zipCode"
+                i18n="@@e-shop.order-success.shipping.zip-code"
+                >Zip</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -70,7 +84,7 @@
         <div class="card-body">
           <table class="table">
             <tbody>
-              <tr *ngFor="let cartProduct of order.cart.products">
+              <tr *ngFor="let cartProduct of order.cart.cartProducts">
                 <td>
                   {{ cartProduct.quantity }} x {{ cartProduct.product.name }}
                 </td>
@@ -81,7 +95,7 @@
                 </td>
               </tr>
               <tr class="font-weight-bold">
-                <td>Total</td>
+                <td i18n="@@e-shop.order-success.table.body.total">Total</td>
                 <td>
                   <span class="float-right">{{
                     order.cart.price | currency: "EUR"

@@ -6,10 +6,15 @@
         type="text"
         [formControl]="filter"
         placeholder="Search..."
+        i18n="@@e-shop.admin-products.search"
       />
     </div>
 
-    <button class="btn btn-primary" [routerLink]="['/admin/products/new']">
+    <button
+      class="btn btn-primary"
+      [routerLink]="['/admin/products/new']"
+      i18n="@@e-shop.admin-products.new-product"
+    >
       New product
     </button>
   </div>
@@ -18,9 +23,15 @@
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Category</th>
+        <th scope="col" i18n="@@e-shop.admin-products.table.header.name">
+          Name
+        </th>
+        <th scope="col" i18n="@@e-shop.admin-products.table.header.price">
+          Price
+        </th>
+        <th scope="col" i18n="@@e-shop.admin-products.table.header.category">
+          Category
+        </th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -38,7 +49,11 @@
         <td>{{ product.price | currency: "EUR" }}</td>
         <td>{{ product.category.name }}</td>
         <td>
-          <a [routerLink]="['/admin/products/', product.id]">Edit</a>
+          <a
+            [routerLink]="['/admin/products/', product.id]"
+            i18n="@@e-shop.admin-products.table.body.edit"
+            >Edit</a
+          >
         </td>
       </tr>
     </tbody>
@@ -53,13 +68,17 @@
 
     <select
       class="custom-select"
-      style="width: auto;"
+      style="width: auto"
       name="pageSize"
       [(ngModel)]="pageSize"
     >
-      <option *ngFor="let items of itemsPerPage" [value]="items"
-        >{{ items }} items per page</option
+      <option
+        *ngFor="let items of itemsPerPage"
+        [value]="items"
+        i18n="@@e-shop.admin-products.items-per-page"
       >
+        {{ items }} items per page
+      </option>
     </select>
   </div>
 </div>
