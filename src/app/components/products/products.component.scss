@@ -1,4 +1,6 @@
-@import "bootstrap";
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
 
 .card-columns {
   @include media-breakpoint-only(md) {
