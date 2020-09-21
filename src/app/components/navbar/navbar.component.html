@@ -1,34 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a
-    class="navbar-brand"
-    (click)="navigateTo('/')"
-    role="button"
-    i18n="@@e-shop.navbar.title"
-    >E-shop</a
-  >
+<nav
+  class="navbar navbar-light bg-light mb-3 justify-content-between navbar-expand"
+>
+  <a class="navbar-brand" [routerLink]="['/']" role="button">
+    <fa-icon icon="store-alt"></fa-icon>
+  </a>
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    (click)="isMenuCollapsed = !isMenuCollapsed"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+  <div>
     <ul ngbNav class="navbar-nav mr-auto">
-      <li ngbNavItem class="d-flex align-items-center">
-        <a
-          ngbNavLink
-          (click)="navigateTo('/shopping-cart')"
-          i18n="@@e-shop.navbar.shopping-cart"
-          >Shopping cart</a
-        >
-        <span
-          class="badge badge-pill badge-primary"
-          *ngIf="cart$ | async as cart"
-          >{{ cart.quantity }}</span
-        >
+      <li ngbNavItem class="d-flex align-items-center mr-3">
+        <a ngbNavLink [routerLink]="['/shopping-cart']">
+          <fa-icon icon="shopping-cart"></fa-icon>
+          <span
+            class="badge badge-pill badge-primary"
+            *ngIf="cart$ | async as cart"
+            >{{ cart.quantity }}</span
+          >
+        </a>
       </li>
       <li
         *ngIf="user$ | async as user; else anonymousUser"
@@ -38,10 +25,14 @@
         <button class="btn" id="userDropdown" ngbDropdownToggle>
           {{ user.name }}
         </button>
-        <div ngbDropdownMenu aria-labelledby="userDropdown">
+        <div
+          ngbDropdownMenu
+          class="dropdown-menu-right"
+          aria-labelledby="userDropdown"
+        >
           <button
             ngbDropdownItem
-            (click)="navigateTo('/my-orders')"
+            [routerLink]="['/my-orders']"
             i18n="@@e-shop.navbar.my-orders"
           >
             My orders
@@ -49,14 +40,14 @@
           <ng-container *ngIf="user.isAdmin">
             <button
               ngbDropdownItem
-              (click)="navigateTo('/admin/orders')"
+              [routerLink]="['/admin/orders']"
               i18n="@@e-shop.navbar.manage-orders"
             >
               Manage orders
             </button>
             <button
               ngbDropdownItem
-              (click)="navigateTo('/admin/products')"
+              [routerLink]="['/admin/products']"
               i18n="@@e-shop.navbar.manage-products"
             >
               Manage products
@@ -73,10 +64,7 @@
       </li>
       <ng-template #anonymousUser>
         <li ngbNavItem>
-          <a
-            ngbNavLink
-            (click)="navigateTo('/login')"
-            i18n="@@e-shop.navbar.login"
+          <a ngbNavLink [routerLink]="['/login']" i18n="@@e-shop.navbar.login"
             >Login</a
           >
         </li>

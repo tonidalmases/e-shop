@@ -405,12 +405,6 @@
           Login with google
         </source>
       </trans-unit>
-      <trans-unit id="e-shop.navbar.title" datatype="html">
-        <source>E-shop</source>
-      </trans-unit>
-      <trans-unit id="e-shop.navbar.shopping-cart" datatype="html">
-        <source>Shopping cart</source>
-      </trans-unit>
       <trans-unit id="e-shop.navbar.my-orders" datatype="html">
         <source>
           My orders

@@ -24,6 +24,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { FaModule } from './fa/fa.module';
 import { effects, reducers } from './store/app.store';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { effects, reducers } from './store/app.store';
     NgbModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(effects),
+    FaModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

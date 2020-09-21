@@ -1,17 +1,19 @@
 <h3 i18n="@@e-shop.shopping-cart.title">Shopping cart</h3>
 
 <div *ngIf="cart$ | async as cart">
-  <p i18n="@@e-shop.shopping-cart.description">
-    You have {{ cart.quantity }} products in the cart.
-  </p>
-  <button
-    *ngIf="cart.quantity > 0"
-    class="btn btn-sm btn-light"
-    (click)="clearShoppingCart()"
-    i18n="@@e-shop.shopping-cart.clear-shopping-cart"
-  >
-    Clear shopping cart
-  </button>
+  <div class="d-flex justify-content-between mb-3">
+    <p i18n="@@e-shop.shopping-cart.description">
+      You have {{ cart.quantity }} products in the cart.
+    </p>
+    <button
+      *ngIf="cart.quantity > 0"
+      class="btn btn-sm btn-light"
+      (click)="clearShoppingCart()"
+      i18n="@@e-shop.shopping-cart.clear-shopping-cart"
+    >
+      Clear shopping cart
+    </button>
+  </div>
 
   <div *ngIf="cart.quantity > 0">
     <table class="table table-striped" *ngIf="cart.cartProducts">

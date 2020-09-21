@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.store';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +6,5 @@ import { AppState } from 'src/app/store/app.store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private store: Store<AppState>) {
-    // this.store
-    //   .select((s) => s.cart.cart)
-    //   .subscribe((cart) => console.log(cart));
-  }
+  constructor() {}
 }

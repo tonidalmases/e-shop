@@ -13,12 +13,10 @@ import { AppState } from 'src/app/store/app.store';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  isMenuCollapsed = true;
   user$: Observable<User>;
   cart$: Observable<Cart>;
 
   constructor(
-    private router: Router,
     private authService: AuthService,
     private store: Store<AppState>
   ) {}
@@ -26,11 +24,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.user$ = this.authService.user$;
     this.cart$ = this.store.select((s) => s.cart.cart);
-  }
-
-  navigateTo(path: string): void {
-    this.router.navigate([path]);
-    this.isMenuCollapsed = true;
   }
 
   logout(): void {

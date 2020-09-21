@@ -487,14 +487,6 @@
           Entrar amb google
         </target>
       </trans-unit>
-      <trans-unit id="e-shop.navbar.title" datatype="html">
-        <source>E-shop</source>
-        <target>E-shop</target>
-      </trans-unit>
-      <trans-unit id="e-shop.navbar.shopping-cart" datatype="html">
-        <source>Shopping cart</source>
-        <target>Carret de compra</target>
-      </trans-unit>
       <trans-unit id="e-shop.navbar.my-orders" datatype="html">
         <source>
           My orders
